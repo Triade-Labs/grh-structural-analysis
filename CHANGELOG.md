@@ -1,6 +1,10 @@
 # Changelog
 
-## Release candidate (private)
+## First public release: 27 Nov 2026
+
+Release candidate `39df2d1` ratified by the coordinator, after review by both models (G P4/91–P4/96).
+
+### Preparation
 
 - First version of the repository: README, METHOD, the D1 finding (the two estimates and the path from the Sha bounds to the final theorem), registers, sources.
 - `verify/`: 122 claims, `verify.py` with PASS/FAIL/UNVERIFIED outcomes, offline unit tests.
