@@ -75,7 +75,7 @@ class ExitCodes(unittest.TestCase):
         self.dir = tempfile.mkdtemp()
         self.sources = os.path.join(self.dir, "sources.json")
         with open(self.sources, "w") as f:
-            json.dump({"archives": {"A": {"raw_base": "unused/"}}, "dataset": {"url": "x", "sha256": "x", "declarations": 1}}, f)
+            json.dump({"archives": {"A": {"raw_base": "unused/"}}, "dataset": {"url": "x", "sha256": "x", "size_bytes": 1, "declarations": 1}}, f)
         self.claims = os.path.join(self.dir, "claims.csv")
         with open(self.claims, "w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=["id", "archive", "path", "line", "check", "pattern", "fq_name"])

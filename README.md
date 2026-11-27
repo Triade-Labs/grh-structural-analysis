@@ -1,6 +1,6 @@
 # Structural analysis of Alpöge's Lean proof of RH/GRH
 
-> **Status: draft in private preparation.** Not yet cross-checked for publication.
+> **Status: release candidate**, pending the coordinator's ratification.
 
 This repository documents an attempt to **understand why** L. Alpöge's Lean formalization of the Riemann hypothesis, and of GRH for Dirichlet L-functions, works. It does not try to certify the proof. Third parties have already checked its formal validity; see [SOURCES.md](SOURCES.md).
 

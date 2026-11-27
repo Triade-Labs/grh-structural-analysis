@@ -8,9 +8,9 @@ Standard library only. Usage:
 
 What this script certifies, and what it does not:
 
-* It checks DOCUMENTARY evidence: that a commit is the one cited, that the
-  dependency dataset has the published SHA-256, that a declaration sits at the
-  cited file and line, that a given text occurs at a cited line, and whether a
+* It checks DOCUMENTARY evidence: that the dependency dataset has the
+  published SHA-256 and size, that a declaration sits at the cited file and
+  line (downloaded at the commit pinned in sources.json), that a given text occurs at a cited line, and whether a
   fully qualified name is (or is not) in J. Shore's dependency dataset.
 * It does NOT check the mathematical meaning of a call, the equivalence of two
   constructions, or originality. Those remain readings by the authors, marked as
@@ -98,6 +98,9 @@ class Dataset:
         except Unavailable as e:
             self._error = str(e)
             raise
+        if len(raw) != self.cfg["size_bytes"]:
+            self._error = f"dataset size {len(raw)} != published {self.cfg['size_bytes']}"
+            raise Unavailable(self._error)
         digest = hashlib.sha256(raw).hexdigest()
         if digest != self.cfg["sha256"]:
             self._error = f"dataset SHA-256 {digest} != published {self.cfg['sha256']}"

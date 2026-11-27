@@ -24,4 +24,4 @@ AI-assisted contributions are welcome if they say so. Our own texts are prepared
 
 Every change to the main branch is reviewed by the maintainers following METHOD.md §3: a cross-check by both models, then the human coordinator's decision. A correction we accept is recorded in `registers/ERRORS.md` and `CHANGELOG.md`, with credit to whoever reported it, if they wish.
 
-Replies on behalf of the project are prepared with AI assistance and approved by the coordinator before posting.
+Replies on behalf of the project follow the same procedure as every public text of the project: they are prepared with AI assistance (and say so), cross-checked by both models, then approved and explicitly authorized by the coordinator before posting.
