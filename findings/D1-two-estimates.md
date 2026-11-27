@@ -30,7 +30,7 @@ This is the **flow of mathematical results**. Between two consecutive steps ther
 3. Inside the proof of `LinkGLOBAL` [C051, C052], `link_gl` [C053, C071] goes through `famGLmin_of_realPlaceSecondLayer` and `FamGLmin.link8` [C074, C075], then through `linkGLOBAL7_min` and `linkGLOBAL7_items` [C055–C058], down to `linkCore` [C059, C060, C079]. `linkCore` assembles the eleven fields of `SizeData₂` [C015, C016, C087, C094]:
    - **`DIV`** is built by `M.data_DIV` from the seventh component of `LinkDIV_at` [C043, C044, C082–C084], that is, from the divisibility;
    - **`SlopeIneq`** is built by `M.data_SlopeIneq` from `hfr`, extracted from the frame property [C085, C086]. That property comes from `frameF_of` → `frame_at_of` → `joint_a_ramified_holds` [C061–C064, C078, C080, C081];
-   - **`Count5`** and **`Slopes`** [C118, C119] come from `CountF` and `SlopesMF`, which receive the mass and volume inputs `MassRatio₂` and `BaseVolumeEqualsMass` (defined as volume = mass) [C067, C068, C115–C117].
+   - **`Count5`** and **`Slopes`** [C118, C119] come from `CountF` and `SlopesMF`, which receive the mass and volume inputs `MassRatio₂` and `BaseVolumeEqualsMass` [C067, C068, C115–C117]. The latter is defined as `volY0 D = massI D D.R.r` [C120]; reading these as a volume and a mass is ours.
 4. Steps 1–5 of §2 follow.
 5. `windowInequality_of_artinInputs` and `level_gm_le_on_family_scales` [C019–C024, C093] lead to `zeroFreeAll_of_topG` [C035, C036].
 6. Separately, `shape_closed_link_n_of_green` [C037, C038] proves the hypothesis `TopG` by calling `topDesWin` [C072]. `zero_free_all_of_green_v_win` [C039, C040] combines it with `zeroFreeAll_of_topG` [C073].
@@ -40,7 +40,7 @@ Not in the dependency graph: the parallel route `shapeWin` → `plugWin` → `pl
 
 ## 4. What this does **not** show
 
-- **The ingredients are not cleanly separated.** `LinkDIV` (the divisibility) also appears among the arguments of `latF` [C077] and `frameRealF_of''` [C065, C066], from which the frame property behind `SlopeIneq` is derived. We have not read what role it plays there.
+- **The ingredients are not cleanly separated.** `LinkDIV` (the divisibility) also appears among the arguments of `latF` [C077] and of `frameRealF_of''` [C121, C122], from which the frame property behind `SlopeIneq` is derived. We have not read what role it plays there.
 - We have not traced where `QuotientSlopeBoundsWith` and `LossBounds` come from.
 - INFERENCE (medium–low confidence): the mass and volume inputs are where the covolume bound enters (the bound our earlier analysis calls `L3main`; the name is ours, not the archive's). `BaseVolumeEqualsMass` is the only covolume-type input we found on this stretch. We have not established that it is the bound itself.
 - Reading the calls is not reading the proofs. The meaning of the calls above is our reading (level L3b in METHOD.md).

@@ -67,5 +67,40 @@ class Outcomes(unittest.TestCase):
         self.assertEqual(verify.check_claim(self.claim(check="decl_at_line", line="2", pattern="theorem foo"), SOURCES, None, True)[0], verify.UNVERIFIED)
 
 
+class ExitCodes(unittest.TestCase):
+    """Exit codes of main(): 0 all PASS, 1 FAIL, 2 UNVERIFIED only, 3 invalid invocation."""
+
+    def setUp(self):
+        import tempfile, json, csv
+        self.dir = tempfile.mkdtemp()
+        self.sources = os.path.join(self.dir, "sources.json")
+        with open(self.sources, "w") as f:
+            json.dump({"archives": {"A": {"raw_base": "unused/"}}, "dataset": {"url": "x", "sha256": "x", "declarations": 1}}, f)
+        self.claims = os.path.join(self.dir, "claims.csv")
+        with open(self.claims, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=["id", "archive", "path", "line", "check", "pattern", "fq_name"])
+            w.writeheader()
+            w.writerow(dict(id="C1", archive="A", path="X.lean", line="2", check="decl_at_line", pattern="theorem foo", fq_name=""))
+            w.writerow(dict(id="C2", archive="A", path="X.lean", line="3", check="decl_at_line", pattern="theorem foo", fq_name=""))
+        self._orig = verify.source_lines
+
+    def tearDown(self):
+        verify.source_lines = self._orig
+
+    def run_main(self, *extra):
+        return verify.main(["--claims", self.claims, "--sources", self.sources, "--offline", *extra])
+
+    def test_codes(self):
+        verify.source_lines = lambda cfg, path, offline: FILE
+        self.assertEqual(self.run_main("--only", "C1"), 0)
+        self.assertEqual(self.run_main(), 1)
+        self.assertEqual(self.run_main("--only", "C999"), 3)
+
+        def boom(cfg, path, offline):
+            raise verify.Unavailable("unreachable")
+        verify.source_lines = boom
+        self.assertEqual(self.run_main("--only", "C1"), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

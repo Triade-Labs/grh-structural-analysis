@@ -23,7 +23,18 @@ Each claim ends in exactly one of three outcomes:
     UNVERIFIED  the check could not be run (e.g. a source was unreachable or
                 its hash did not match). UNVERIFIED is never counted as FAIL.
 
-Exit status: 0 if there is no FAIL, 1 otherwise.
+Exit status:
+    0  every requested check is PASS
+    1  at least one FAIL
+    2  no FAIL, but at least one UNVERIFIED
+    3  invalid configuration or invocation (e.g. unknown claim id, no claims)
+
+Limits of the documentary checks:
+
+* Commits are pinned in the download URLs (verify/sources.json); the script
+  does not independently verify the Git identity of the downloaded files.
+* Downloads are cached in verify/.cache, keyed by URL, not by content. Use
+  --refresh to ignore the cache and download again.
 """
 
 import argparse
@@ -48,11 +59,14 @@ class Unavailable(Exception):
     """A source could not be obtained; the claim is UNVERIFIED, not FAIL."""
 
 
+REFRESH = False
+
+
 def fetch(url, offline=False, timeout=60):
     os.makedirs(CACHE, exist_ok=True)
     name = hashlib.sha256(url.encode()).hexdigest()
     path = os.path.join(CACHE, name)
-    if os.path.exists(path):
+    if os.path.exists(path) and not REFRESH:
         with open(path, "rb") as f:
             return f.read()
     if offline:
@@ -133,16 +147,34 @@ def main(argv=None):
     ap.add_argument("--claims", default=os.path.join(HERE, "claims.csv"))
     ap.add_argument("--sources", default=os.path.join(HERE, "sources.json"))
     ap.add_argument("--offline", action="store_true")
+    ap.add_argument("--refresh", action="store_true", help="ignore the download cache")
     ap.add_argument("--only", help="comma-separated claim ids")
     args = ap.parse_args(argv)
+    global REFRESH
+    REFRESH = args.refresh
 
-    with open(args.sources, encoding="utf-8") as f:
-        sources = json.load(f)
-    with open(args.claims, encoding="utf-8", newline="") as f:
-        claims = list(csv.DictReader(f))
+    try:
+        with open(args.sources, encoding="utf-8") as f:
+            sources = json.load(f)
+        with open(args.claims, encoding="utf-8", newline="") as f:
+            claims = list(csv.DictReader(f))
+    except (OSError, ValueError) as e:
+        print(f"CONFIG ERROR: {e}")
+        return 3
+    ids = [c["id"] for c in claims]
+    if len(ids) != len(set(ids)):
+        print("CONFIG ERROR: duplicate claim ids")
+        return 3
     if args.only:
-        keep = set(args.only.split(","))
-        claims = [c for c in claims if c["id"] in keep]
+        keep = [x.strip() for x in args.only.split(",") if x.strip()]
+        unknown = sorted(set(keep) - set(ids))
+        if unknown:
+            print("CONFIG ERROR: unknown claim id(s): " + ", ".join(unknown))
+            return 3
+        claims = [c for c in claims if c["id"] in set(keep)]
+    if not claims:
+        print("CONFIG ERROR: no claims to check")
+        return 3
 
     dataset = Dataset(sources["dataset"], args.offline)
     counts = {PASS: 0, FAIL: 0, UNVERIFIED: 0}
@@ -153,7 +185,11 @@ def main(argv=None):
         print(f"{outcome:<10} {c['id']}  {c['check']:<19} {where}" + (f"  -- {detail}" if detail else ""))
     print()
     print(f"PASS {counts[PASS]}  FAIL {counts[FAIL]}  UNVERIFIED {counts[UNVERIFIED]}  (total {len(claims)})")
-    return 1 if counts[FAIL] else 0
+    if counts[FAIL]:
+        return 1
+    if counts[UNVERIFIED]:
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

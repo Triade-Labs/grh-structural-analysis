@@ -32,7 +32,13 @@ python3 verify/verify.py
 
 The script uses only the Python standard library. It downloads the cited Lean files at the cited commits, and J. Shore's dependency dataset, whose SHA-256 it checks against the published value. It then checks every claim in `verify/claims.csv`. Each claim ends as **PASS** (confirmed), **FAIL** (discrepancy) or **UNVERIFIED** (the check could not be run). A source that cannot be reached gives UNVERIFIED, never FAIL.
 
-**What the script does and does not certify.** It certifies documentary correspondence: commits, hashes, the declaration at a file and line, the text at a line, and membership in the dependency dataset. It does **not** certify what a call means mathematically, whether two constructions are equivalent, or whether anything is original. Those are our readings, and the documents mark them as such.
+Exit codes: `0` all checks PASS, `1` at least one FAIL, `2` no FAIL but at least one UNVERIFIED, `3` invalid invocation (for example an unknown claim ID). A run that confirms nothing never exits with `0`.
+
+**What the script does and does not certify.**
+- It certifies documentary correspondence: the dataset's SHA-256 and size, the declaration at a file and line, the text at a line, and membership in the dependency dataset.
+- Commits are pinned in the download URLs (`verify/sources.json`). The script does not independently verify the Git identity of the downloaded files. Downloads are cached by URL; `--refresh` downloads them again.
+- Every claim has two separate columns: `verified_predicate` is exactly what the script checks; `interpretation` is our reading. A PASS confirms the predicate, not the interpretation.
+- The script does **not** certify what a call means mathematically, whether two constructions are equivalent, or whether anything is original.
 
 ## What we do not claim
 
@@ -42,7 +48,7 @@ The script uses only the Python standard library. It downloads the cited Lean fi
 
 ## Corrections
 
-If you find an error, please open an issue. Corrections are recorded in [registers/ERRORS.md](registers/ERRORS.md) and [CHANGELOG.md](CHANGELOG.md).
+If you find an error, please open an issue (see [CONTRIBUTING.md](CONTRIBUTING.md)). Corrections are recorded in [registers/ERRORS.md](registers/ERRORS.md) and [CHANGELOG.md](CHANGELOG.md).
 
 ## Licences
 

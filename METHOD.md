@@ -14,6 +14,7 @@ Names alone are not evidence: the archive contains different declarations with t
 
 | Check | What it establishes | Automated |
 |---|---|---|
+| **DOC** A declaration, or a given text, is at the cited file and line | The source says what we quote, at the cited commit. Nothing about dependencies or meaning | Yes |
 | **L3a** The name is in J. Shore's dataset `cone-decls` (v0.2.1) | The declaration belongs to the **dependency graph** of the five final theorems. Absence means it is not in the graph, relative to that dataset and the theorems it covers. | Yes |
 | **L3b** The call is read in the source | There is a textual link between two declarations at a given line | Partly: the script checks that the text is present; what the call does is our reading |
 | **L3c** The proof is read | We understand the mathematical mechanism, within the limits of our analysis | No |
@@ -21,6 +22,8 @@ Names alone are not evidence: the archive contains different declarations with t
 Belonging to the dependency graph is not the same as being a step of the argument. A declaration can be referenced without carrying any mathematical weight. H. Nashida draws the same distinction (note r8, §7.5; see SOURCES.md). In our texts, L3a is always worded as "in the dependency graph", never as "used as a step".
 
 We never claim **indispensability**: that a declaration could not be removed by rewriting the proof. Our data cannot establish it.
+
+Each row of `verify/claims.csv` separates `verified_predicate` (exactly what the script checks) from `interpretation` (our reading). A PASS confirms the predicate only.
 
 ## 3. How a result is produced
 
