@@ -2,7 +2,7 @@
 
 **Scope.** Archive A, commit `7cbf7a0`. This note follows up an open item of [D1-two-estimates.md](D1-two-estimates.md) §4: `LinkDIV` also appears among the arguments of the branch that produces the lower estimate `Data.SlopeIneq`.
 
-**Credit.** The analysis of which conjuncts are used was first given by **H. Nashida** (Polymath, `overall structure`, reply of 28 Nov 2026), in answer to our question. Here we state which parts we have replicated and which we have not. Conjuncts are numbered from 0.
+**Credit.** The analysis of which conjuncts are used was first given by **H. Nashida** (Polymath, `overall structure`, [reply of 28 Nov 2026](https://rh-polymath.zulipchat.com/#narrow/channel/658828-overall-structure/topic/Structural.20differences.20between.20Alpoge.20and.20Sernau.20proofs/with/644307167), Zulip registration required), in answer to our question. Here we state which parts we have replicated and which we have not. Conjuncts are numbered from 0.
 
 ## 1. Replicated by us (EVIDENCE, level L3b)
 
