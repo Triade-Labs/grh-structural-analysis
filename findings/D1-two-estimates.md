@@ -17,7 +17,7 @@
 4. From Ga to ASK, the code contains two variants:
    - the **pointwise** one, `each_unit_bound_statement` [C011, C012, C090], is in the dependency graph and is the one `Deduction.ch_top` calls [C091];
    - the **averaged** one, `uniform_bound_statement` with `Losses` and `MeanBoundSecondForm` [C095–C100], exists in the archive but is not in the dependency graph. Neither is the route through `chain_top_bound` [C101, C102, C111, C112].
-5. `Deduction.ch_top` [C013]: for each u, ASK − Main ≤ (error factor). `core_gm` [C017, C018, C092] then gives Λ.Gm(x) ≤ x^(1/2 + O(ε)).
+5. `Deduction.ch_top` [C013]: for each u, ASK − Main ≤ (error factor). The identity gapA = ASK − Main used there is obtained from a hypothesis, `Deduction.CH.IdentU` [C132, C133], not from a definition (observation by H. Nashida). `core_gm` [C017, C018, C092] then gives Λ.Gm(x) ≤ x^(1/2 + O(ε)).
 
 INFERENCE (medium–high confidence): ASK is the prime-side quantity (divisibility gained at non-split primes) and Main the geometric main term. This reading comes from the structure of the definitions, not from reading every proof.
 
@@ -29,7 +29,7 @@ This is the **flow of mathematical results**. Between two consecutive steps ther
 2. `topDesWin` [C033, C034] builds families with `ChainTied` [C025, C026]. The divisibility produces `hD` [C069], and `hD` is passed into the `LinkGLOBAL` argument [C070].
 3. Inside the proof of `LinkGLOBAL` [C051, C052], `link_gl` [C053, C071] goes through `famGLmin_of_realPlaceSecondLayer` and `FamGLmin.link8` [C074, C075], then through `linkGLOBAL7_min` and `linkGLOBAL7_items` [C055–C058], down to `linkCore` [C059, C060, C079]. `linkCore` assembles the eleven fields of `SizeData₂` [C015, C016, C087, C094]:
    - **`DIV`** is built by `M.data_DIV` from the seventh component of `LinkDIV_at` [C043, C044, C082–C084], that is, from the divisibility;
-   - **`SlopeIneq`** is built by `M.data_SlopeIneq` from `hfr`, extracted from the frame property [C085, C086]. That property comes from `frameF_of` → `frame_at_of` → `joint_a_ramified_holds` [C061–C064, C078, C080, C081];
+   - **`SlopeIneq`** is built by `M.data_SlopeIneq` from `hfr` [C085, C086], the last component of the frame property `Frame_at` [C124]. In `frame_at_of` that component is closed by `joint_a_ramified_holds` [C123, C081], and `frameF_of` obtains the frame property from `frame_at_of` [C061–C064, C078, C080]. This is the field `Data.SlopeIneq`, distinct from the declaration `Formalism.HN.SlopeIneq` [C134]; see [D1a-linkdiv-in-the-lower-branch.md](D1a-linkdiv-in-the-lower-branch.md);
    - **`Count5`** and **`Slopes`** [C118, C119] come from `CountF` and `SlopesMF`, which receive the mass and volume inputs `MassRatio₂` and `BaseVolumeEqualsMass` [C067, C068, C115–C117]. The latter is defined as `volY0 D = massI D D.R.r` [C120]; reading these as a volume and a mass is ours.
 4. Steps 1–5 of §2 follow.
 5. `windowInequality_of_artinInputs` and `level_gm_le_on_family_scales` [C019–C024, C093] lead to `zeroFreeAll_of_topG` [C035, C036].
@@ -40,7 +40,7 @@ Not in the dependency graph: the parallel route `shapeWin` → `plugWin` → `pl
 
 ## 4. What this does **not** show
 
-- **The ingredients are not cleanly separated.** `LinkDIV` (the divisibility) also appears among the arguments of `latF` [C077] and of `frameRealF_of''` [C121, C122], from which the frame property behind `SlopeIneq` is derived. We have not read what role it plays there.
+- **The ingredients are not fully separated.** `LinkDIV` (the divisibility) also appears among the arguments of `latF` [C077] and of `frameRealF_of''` [C121, C122], from which the frame property behind `SlopeIneq` is derived. Only conjuncts without the divisibility constant are used there: see [D1a-linkdiv-in-the-lower-branch.md](D1a-linkdiv-in-the-lower-branch.md).
 - We have not traced where `QuotientSlopeBoundsWith` and `LossBounds` come from.
 - INFERENCE (medium–low confidence): the mass and volume inputs are where the covolume bound enters (the bound our earlier analysis calls `L3main`; the name is ours, not the archive's). `BaseVolumeEqualsMass` is the only covolume-type input we found on this stretch. We have not established that it is the bound itself.
 - Reading the calls is not reading the proofs. The meaning of the calls above is our reading (level L3b in METHOD.md).

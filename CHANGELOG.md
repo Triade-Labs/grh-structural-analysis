@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- New finding `findings/D1a-linkdiv-in-the-lower-branch.md` (first analysis by H. Nashida; partly replicated): which conjuncts of `LinkDIV_at` the lower estimate uses.
+- The step from `joint_a_ramified_holds` to `Data.SlopeIneq` through `Frame_at` documented; `IdentU` correction in D1 (observation by H. Nashida).
+- 17 claims added (C123–C139). D1.a and N1 updated in the register; our public question marked as answered.
+
 ## First public release: 27 Nov 2026
 
 Release candidate `39df2d1` ratified by the coordinator, after review by both models (G P4/91–P4/96).
