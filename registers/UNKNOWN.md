@@ -7,12 +7,12 @@ These are the questions we cannot settle with the data we have. An item closes o
 | U-ORIG | Are the four candidate mechanisms IN1–IN4 original? (IN1 common-space factorisation of theta integrals with non-vanishing via Rallis; IN2 comparison of arithmetic volumes through injections with subexponential loss; IN3 logarithmic bound on the maximal slope of the Lie bundle; IN4 mean-slope inequality with corank control) | Open. Specialist question |
 | U-L4 | Is any ingredient indispensable, i.e. not removable by rewriting? | Open. Our method cannot decide it |
 | U-MIRROR | Is the analysed mirror identical to the archive published on the author's site? | Matches the community's `original` branch; not compared with the author's site |
-| D1.a | What role does the divisibility (`LinkDIV`) play in the branch that produces the lower estimate (`latF`, `frameRealF_of''`)? | Open. Presence among the arguments is evidence; the role has not been read. Asked publicly (questions/) |
+| D1.a | What role does the divisibility (`LinkDIV`) play in the branch that produces the lower estimate (`latF`, `frameRealF_of''`)? | **Partly answered** (H. Nashida, replicated in part by us): only conjuncts 0, 4, 5, which do not contain the divisibility constant, are used there. Their mathematical content is not yet read; arithmetic independence of the two branches is not established. See findings/D1a-linkdiv-in-the-lower-branch.md |
 | D1.b | Where do `QuotientSlopeBoundsWith` and `LossBounds` come from? | Open |
 | D1.c | Are the mass and volume inputs where the covolume bound enters? | Inference, medium–low confidence |
 | U12 | Are the cohomological techniques of the original and of the shortened proof the same? | Open. Both contain a global weighted sum over finite sets of primes (see below); the same summation form does not imply the same mechanism |
 | U12.b | Do the original and the shortened proof have the same main inequality? | Not established. According to Nashida (r8, §8.3–8.4), the constant c₁ has the same value provided the prime d is the same; the main term has the same form, but it is averaged over different sets with different weights, and equality of values was not verified. "Same architecture, not the same inequality" is a structural summary, not a proof of non-equivalence |
-| N1 | Why the constraint m ≤ 2√x (Nashida, §7.6)? | Open. Not one of our lines of work |
+| N1 | Why the constraint m ≤ 2√x (Nashida, §7.6)? | Open. M. Rubinstein's outline of the shortened proof (v1.5, 27 Nov 2026, step 10) explains the choice by a gain linear in m against a denominator cost quadratic in m. Which estimate would fail first for larger m is unknown (Nashida: 47 of 70 declarations use the upper bound on m; slack not extracted). Not one of our lines of work |
 
 Global weighted sums over primes:
 - in the original, `UpperTheory.Top.VVle` (archive A, `Development/AutomorphicArithmetic/CharacterBoxes/ExistsPageN.lean:12–49`);
